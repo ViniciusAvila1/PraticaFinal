@@ -1,32 +1,32 @@
-const productModel = require('./product-model');
+const bookModel = require('./book-model');
 const {Op} = require('sequelize');
-const Category = require('../category/category-model');
+const Author = require('../author/author-model');
 
 
 
-const save = async (product) => {
-    return productModel.create(product);
+const save = async (book) => {
+    return bookModel.create(book);
 }
 
 const findAll = async (filter) => {
-    const {name, quantity} = filter;
+    const {title, authorName} = filter;
 
-    return productModel.findAll({
+    return bookModel.findAll({
         include: [{
-            model: Category,
+            model: Author,
             required: true //inner
         }],
         where: {
-            ...(name) ? {name: {[Op.iLike]: `${name}%`}} : {},
-            ...(quantity) ? {quantity}: {}
+            ...(title) ? {title: {[Op.iLike]: `${title}%`}} : {},
+            ...(authorName) ? {'$Author.name$': {[Op.iLike]: `${authorName}%`}} : {}
         }
     });
 }
 
 const findById = async (id) => {
-    return productModel.findOne({
+    return bookModel.findOne({
         include: [ {
-            model: Category,
+            model: Author,
             required: false //left
         }],
         where: {
@@ -36,8 +36,7 @@ const findById = async (id) => {
 }
 
 const deleteById = async (id) => {
-
-    productModel.destroy({
+    return bookModel.destroy({
         where: {
             id: id
         }

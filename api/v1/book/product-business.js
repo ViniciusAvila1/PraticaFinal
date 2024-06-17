@@ -1,4 +1,4 @@
-const repository = require('./product-repository')
+const repository = require('./book-repository')
 
 const create = async (product) => {
 
