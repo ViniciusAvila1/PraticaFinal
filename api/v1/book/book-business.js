@@ -1,9 +1,9 @@
 const repository = require('./book-repository')
 
-const create = async (product) => {
+const create = async (book) => {
 
     //logica negocio
-    return repository.save(product);
+    return repository.save(book);
 }
 
 const list = async (filter) => {

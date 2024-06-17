@@ -1,43 +1,42 @@
-const { getProducts, create, findById, deleteById} = require('./product-controller');
-const schema = require('./product-schema');
+const { getBooks, create, findById, deleteById} = require('./book-controller');
+const schema = require('./book-schema');
 
 const plugin = {
-    name: 'product-v1-route',
+    name: 'book-v1-route',
     version: '1',
     register: (server) => {
         server.route([
             {
                 method: "GET",
-                path: "/v1/products",
+                path: "/v1/books",
                 options: {
                     tags: ['api'],
-                    description: 'List of products',
-                    handler: getProducts,
-                    validate: schema.getProducts
+                    description: 'Lista de livros',
+                    handler: getBooks,
+                    validate: schema.getBooks
                 }
             },
             {
                 method: "GET",
-                path: "/v1/products/{id}",
+                path: "/v1/books/{id}",
                 options: {
                     tags: ['api'],
-                    description: 'Create a product',
+                    description: 'Encontrar livro pelo ID',
                     handler: findById,
                     validate: schema.getById
                 }
             },
             {
                 method: "POST",
-                path: "/v1/products",
+                path: "/v1/books",
                 options: {
                     tags: ['api'],
-                    handler: create,
-                    validate: schema.createProductsSchema
+                    handler: create
                 }
             },
             {
                 method: "DELETE",
-                path: "/v1/products/{id}",
+                path: "/v1/books/{id}",
                 options: {
                     tags: ['api'],
                     handler: deleteById,

@@ -1,6 +1,6 @@
-const business = require('./product-business');
+const business = require('./book-business');
 
-const getProducts = async (request, h) => {
+const getBooks = async (request, h) => {
     
     const {query} = request;
 
@@ -13,7 +13,7 @@ const create = async (request, h) => {
     const {payload} = request;
 
     try {
-        payload.categoryId = payload.category.id;
+        payload.bookId = payload.book.id;
         const result = await business.create(payload);
 
         return h.response(result).code(201);
@@ -24,17 +24,17 @@ const create = async (request, h) => {
 
 const findById = async (request, h) => {
     
-    const productId = request.params.id;
+    const bookId = request.params.id;
 
-    return h.response(await business.findById(productId));
+    return h.response(await business.findById(bookId));
 }
 
 
 const deleteById = async (request, h) => {
-    const productId = request.params.id;
+    const bookId = request.params.id;
     
     try {
-        await business.deleteById(productId);
+        await business.deleteById(bookId);
 
         return h.response({}).code(204);
     } catch (error) {
@@ -43,7 +43,7 @@ const deleteById = async (request, h) => {
 }
 
 module.exports = {
-    getProducts,
+    getBooks,
     create,
     findById, deleteById
 };

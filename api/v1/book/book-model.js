@@ -6,7 +6,7 @@ const Book = database.sequelize.define('Book', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
-        allowNull: true,
+        allowNull: false,
         primaryKey: true,
         field: 'codigo' //nome do atributo do banco
     },
@@ -37,6 +37,10 @@ const Book = database.sequelize.define('Book', {
     timestamps: false,
     tableName: 'tb_book'
 });
+
+Author.hasMany(Book, {
+    foreignKey: "authorId",
+  });
 
 Book.belongsTo(Author, {foreignKey: 'authorId'});
 

@@ -1,31 +1,32 @@
 const Sequelize = require('sequelize');
 const database = require('../../../config/db');
-const Book = require('../book/book-model');
 
 const Author = database.sequelize.define('Author', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: true,
-        primaryKey: true
+        primaryKey: true,
+        field: 'id'
     },
     name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        field: 'name'
     },
     biography: {
         type: Sequelize.TEXT,
-        allowNull: false
+        allowNull: false,
+        field: 'biography'
     },
     birthDate: {
         type: Sequelize.DATEONLY,
-        allowNull: false
+        allowNull: false,
+        field: 'birth_date'
     }
 }, {
     timestamps: false,
     tableName: 'tb_author'
 });
-
-Author.hasMany(Book, { foreignKey: 'authorId' });
 
 module.exports = Author;
